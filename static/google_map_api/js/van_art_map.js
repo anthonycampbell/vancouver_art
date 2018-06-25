@@ -4,6 +4,12 @@ function initMap() {
   // The map, centered at Uluru
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 11, center: vancouver});
-  // The marker, positioned at Uluru
-  //var marker = new google.maps.Marker({position: vancouver, map: map});
+  for (i = 0; i < art.length; i++){
+    var lat = art[i].fields['lat'];
+    var lon = art[i].fields['lon'];
+    if (lat && lon){
+      var point = {lat: lat, lng: lon};
+      var marker = new google.maps.Marker({position: point, map: map});
+    }
+  }
 }
