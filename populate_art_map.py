@@ -13,12 +13,15 @@ def populate():
     json_content = json_file.read()
     json_data = json.loads(json_content)
     for i in range(len(json_data[1]['features'])):
-	add_piece(json_data[1]['features'][i]['properties']['Latitude'],
-			 json_data[1]['features'][i]['properties']['Longitude'])
+	add_piece(json_data[1]['features'][i]['properties']['TitleOfWork'],
+		  json_data[1]['features'][i]['properties']['Latitude'],
+		  json_data[1]['features'][i]['properties']['Longitude'])
     json_file.close()
 
-def add_piece(lat, lon):
-    p = ArtPiece(lat=lat, lon=lon)
+def add_piece(title, lat, lon):
+    p = ArtPiece(title=title,
+		 lat=lat,
+		 lon=lon)
     p.save()
     return p
 

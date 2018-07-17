@@ -19,7 +19,33 @@
     <h1>Vancouver Art</h1>
     <!--The div element for the map -->
     <div id="map"></div>
-	<script src="{% static "google_map_api/js/van_art_map.js" %}">
+	<script type=text/javascript>
+	  function initMap() {
+	    var vancouver = {lat: 49.2827, lng: -123.1207};
+	    var img = {url: '/static/pics/museum.png', scaledSize: new google.maps.Size(45, 57)};
+	    var map = new google.maps.Map(document.getElementById('map'), {zoom: 11, center: vancouver});
+	    var infowindow = new google.maps.InfoWindow();
+	    var title;
+	    var lat;
+	    var lon;
+	    var point;
+	    var marker;
+	    for (i = 0; i < art.length; i++){
+	      title = art[i].fields['title'];
+	      lat = art[i].fields['lat'];
+	      lon = art[i].fields['lon'];
+	      if (lat && lon){
+		point = {lat: lat, lng: lon};
+		marker = new google.maps.Marker({position: point, map: map, icon: img});
+		google.maps.event.addListener(marker, 'click', (function (marker, title) {
+		  return function() {
+		    infowindow.setContent(title);
+		    infowindow.open(map, marker);
+		  }
+		})(marker, title));
+	      }
+	    }
+	  }
 	</script>
 	<script async defer
 	    src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap">
