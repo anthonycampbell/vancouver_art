@@ -24,25 +24,33 @@
 	    var vancouver = {lat: 49.2827, lng: -123.1207};
 	    var img = {url: '/static/pics/museum.png', scaledSize: new google.maps.Size(45, 57)};
 	    var map = new google.maps.Map(document.getElementById('map'), {zoom: 11, center: vancouver});
-	    var infowindow = new google.maps.InfoWindow();
+	    var infowindow = new google.maps.InfoWindow({maxWidth: 200});
 	    var title;
 	    var lat;
 	    var lon;
 	    var point;
 	    var marker;
+	    var photoURL;
+	    var description;
 	    for (i = 0; i < art.length; i++){
 	      title = art[i].fields['title'];
+	      description = art[i].fields['description'];
+	      photoURL = art[i].fields['photoURL'];
 	      lat = art[i].fields['lat'];
 	      lon = art[i].fields['lon'];
 	      if (lat && lon){
 		point = {lat: lat, lng: lon};
 		marker = new google.maps.Marker({position: point, map: map, icon: img});
-		google.maps.event.addListener(marker, 'click', (function (marker, title) {
+		google.maps.event.addListener(marker, 'click', (function (marker, title, description, photoURL) {
 		  return function() {
-		    infowindow.setContent(title);
+		    infowindow.setContent("<div style=\"max-height:150px\";\"overflow-y:auto\">" +
+					  "<b>"+title+"</b>" + "<br/>" +
+					  "Description: " + description + "<br/>" +
+					  "Photo:<a href="+photoURL+">"+photoURL+"</a>" +
+					  "</div>");
 		    infowindow.open(map, marker);
 		  }
-		})(marker, title));
+		})(marker, title, description, photoURL));
 	      }
 	    }
 	  }

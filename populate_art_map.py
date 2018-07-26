@@ -14,12 +14,16 @@ def populate():
     json_data = json.loads(json_content)
     for i in range(len(json_data[1]['features'])):
 	add_piece(json_data[1]['features'][i]['properties']['TitleOfWork'],
+		  json_data[1]['features'][i]['properties']['DescriptionOfwork'],
+		  json_data[1]['features'][i]['properties']['PhotoURL'],
 		  json_data[1]['features'][i]['properties']['Latitude'],
 		  json_data[1]['features'][i]['properties']['Longitude'])
     json_file.close()
 
-def add_piece(title, lat, lon):
+def add_piece(title, description, photo, lat, lon):
     p = ArtPiece(title=title,
+		 description=description,
+		 photoURL=photo,
 		 lat=lat,
 		 lon=lon)
     p.save()
