@@ -62,7 +62,7 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap"
 	async defer></script>
     {% if user.is_authenticated %}
-    <a href="/art_map/logout">Logout</a><br/>
+    <a href="/art_map/logout/">Logout</a><br/>
     {% else %}
     <a href="/art_map/register/">Register Here</a><br/>
     <a href="/art_map/login/">Login</a><br/>
