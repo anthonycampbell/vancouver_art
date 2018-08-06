@@ -64,4 +64,20 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/art_map/')
-	
+
+@login_required
+def add_favourite(request):
+    if request.method == 'POST':
+	if request.user.is_active:
+	    art_id = request.POST.get('art_id')
+	    art_piece = ArtPiece.objects.get(pk=art_id)
+	    request.user.userprofile.favourites.add(art_piece)
+	    request.user.userprofile.save()
+	    return HttpResponseRedirect('/art_map/')
+	else:
+	    return HttpResponse("your account is disabled")
+
+@login_required
+def favourites(request):
+    favourites_list = request.user.userprofile.favourites.all()
+    return render(request, 'art_map/favourites.html', {'favourites': favourites_list})

@@ -36,7 +36,9 @@
 	    var marker;
 	    var photoURL;
 	    var description;
+	    var art_id;
 	    for (i = 0; i < art.length; i++){
+	      art_id = art[i].pk;
 	      title = art[i].fields['title'];
 	      description = art[i].fields['description'];
 	      photoURL = art[i].fields['photoURL'];
@@ -45,16 +47,21 @@
 	      if (lat && lon){
 		point = {lat: lat, lng: lon};
 		marker = new google.maps.Marker({position: point, map: map, icon: img});
-		google.maps.event.addListener(marker, 'click', (function (marker, title, description, photoURL) {
+		google.maps.event.addListener(marker, 'click', (function (marker, art_id, title, description, photoURL) {
 		  return function() {
 		    infowindow.setContent("<div style=\"max-height:150px\";\"overflow-y:auto\">" +
-					  "<b>"+title+"</b>" + "<br/>" +
-					  "Description: " + description + "<br/>" +
-					  "Photo:<a href="+photoURL+">"+photoURL+"</a>" +
+					  "<form id=\"add_favourite_form\" method=\"post\" action=\"/art_map/add_favourite/\">" +
+					  "{% csrf_token %}" +
+					  "<input type=\"hidden\" id=\"art_id\" name=\"art_id\" value="+art_id+">" +
+					  "<b>"+title+"</b><br/>" +
+					  "Description: "+description+"<br/>" +
+					  "Photo:<a href="+photoURL+">"+photoURL+"</a><br/>" +
+					  "<input type=\"submit\" value=\"favourite\"/><br/>" +
+					  "</form><br/>" +
 					  "</div>");
 		    infowindow.open(map, marker);
 		  }
-		})(marker, title, description, photoURL));
+		})(marker, art_id, title, description, photoURL));
 	      }
 	    }
 	  }
@@ -67,5 +74,6 @@
     <a href="/art_map/register/">Register Here</a><br/>
     <a href="/art_map/login/">Login</a><br/>
     {% endif %}
+    <a href="/art_map/favourites/">favourites</a><br/>
   </body>
 </html>

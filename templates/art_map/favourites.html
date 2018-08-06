@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+	<title>Art_Map Favourites</title>
+    </head>
+    <body>
+	<h1>Favourites</h1>
+	<ul>
+	{% for art_piece in favourites %}
+	     <li>{{ art_piece }}</li>
+	{% endfor %}
+	</ul>
+	<a href="/art_map/">Return to homepage</a><br/>
+    </body>
+</html>
