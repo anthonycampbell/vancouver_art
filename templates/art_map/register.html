@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>Art_Map</title>
+    </head>
+
+    <body>
+	<h1>Register with Art_Map<h1>
+	{% if registered %}
+	Thank you for registering
+	<a href="/art_map/">Return ro homepage.</a><br/>
+	{% else %}
+	Register Here<br/>
+	<form id="user_form" method="post" action="/art_map/register/">
+	    {% csrf_token %}
+	    {{ user_form.as_p }}
+	    {{ profile_form.as_p }}
+	    <input type="submit" name="submit" value="register" />
+	</form>
+	{% endif %}
+    </body>
+</html>

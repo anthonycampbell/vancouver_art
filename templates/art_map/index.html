@@ -16,7 +16,11 @@
     </script>
   </head>
   <body>
+    {% if user.is_authenticated %}
+    <h1>Vancouver Art {{ user.username }}</h1>
+    {% else %}
     <h1>Vancouver Art</h1>
+    {% endif %}
     <!--The div element for the map -->
     <div id="map"></div>
 	<script type=text/javascript>
@@ -55,8 +59,13 @@
 	    }
 	  }
 	</script>
-	<script async defer
-	    src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap">
-	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap"
+	async defer></script>
+    {% if user.is_authenticated %}
+    <a href="/art_map/logout">Logout</a><br/>
+    {% else %}
+    <a href="/art_map/register/">Register Here</a><br/>
+    <a href="/art_map/login/">Login</a><br/>
+    {% endif %}
   </body>
 </html>
