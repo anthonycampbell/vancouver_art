@@ -16,17 +16,13 @@
     </script>
   </head>
   <body>
-    {% if user.is_authenticated %}
-    <h1>Vancouver Art {{ user.username }}</h1>
-    {% else %}
     <h1>Vancouver Art</h1>
-    {% endif %}
     <!--The div element for the map -->
     <div id="map"></div>
 	<script type=text/javascript>
 	  function initMap() {
 	    var vancouver = {lat: 49.2827, lng: -123.1207};
-	    var img = {url: '/static/pics/museum.png', scaledSize: new google.maps.Size(45, 57)};
+	    var img = {url: '/static/pics/fancy-icon.png', scaledSize: new google.maps.Size(20, 20)};
 	    var map = new google.maps.Map(document.getElementById('map'), {zoom: 11, center: vancouver});
 	    var infowindow = new google.maps.InfoWindow({maxWidth: 200});
 	    var title;
@@ -74,6 +70,6 @@
     <a href="/art_map/register/">Register Here</a><br/>
     <a href="/art_map/login/">Login</a><br/>
     {% endif %}
-    <a href="/art_map/favourites/">favourites</a><br/>
+    <a href="/art_map/profile/">Profile</a><br/>
   </body>
 </html>

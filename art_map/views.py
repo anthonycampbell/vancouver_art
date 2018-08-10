@@ -78,6 +78,6 @@ def add_favourite(request):
 	    return HttpResponse("your account is disabled")
 
 @login_required
-def favourites(request):
+def profile(request):
     favourites_list = request.user.userprofile.favourites.all()
-    return render(request, 'art_map/favourites.html', {'favourites': favourites_list})
+    return render(request, 'art_map/profile.html', {'favourites': favourites_list})
