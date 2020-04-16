@@ -4,7 +4,7 @@
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="../../static/styles.css?rand=69865" />
+    <link rel="stylesheet" type="text/css" href="../../static/styles.css?rand=6989065" />
     <script type=text/javascript>
       var art = JSON.parse({{ art|safe }});
     </script>
@@ -13,7 +13,7 @@
     <div id="header">
       <h1>Vancouver Art</h1>
       <div class="dropdown" onclick="toggleDropdown()">
-        <div class="dropdown-head" >
+        <div class="dropdown-item" style="z-index: 4" >
           Menu
         </div>
         {% if user.is_authenticated %}
@@ -21,14 +21,14 @@
             <a href="/art_map/logout/">Logout</a>
           </div>
         {% else %}
-          <div class="dropdown-item" >
+          <div class="dropdown-item" style="z-index: 3">
             <a href="/art_map/register/">Register</a>
           </div>
-          <div class="dropdown-item">
+          <div class="dropdown-item" style="z-index: 2">
             <a href="/art_map/login/">Login</a>
           </div>
         {% endif %}
-          <div class="dropdown-item">
+          <div class="dropdown-item" style="z-index: 1">
             <a href="/art_map/profile/">Profile</a>
           </div>
       </div>
@@ -115,15 +115,41 @@
     {% endif %}
 
     <script>
+      function drop(item, i){
+        var interval = setInterval(helper, 5);
+        var delta = 0;
+        function helper(){
+          if (delta == (100*i)){
+            clearInterval(interval);
+          } else {
+            delta++;
+            item.style.top = delta + "%";
+          }
+        }
+      }
+
+      function hide(item){
+        var id = setInterval(helper, 5);
+        var delta = parseInt(item.style.top.substring(0, item.style.top.length-1));
+        function helper(){
+          if (delta == 0){
+            clearInterval(id);
+          } else {
+            delta--;
+            item.style.top = delta + "%";
+          }
+        }
+      }
+
       function toggleDropdown(){
         var dropdownItems = document.querySelectorAll('#header .dropdown-item');
-        var visibility;
+        var top;
         for (var i = 0; i < dropdownItems.length; i++){
-          visibility = getComputedStyle(dropdownItems[i]).visibility;
-          if (visibility === "hidden"){
-            dropdownItems[i].style.visibility = "visible";
-          } else{
-            dropdownItems[i].style.visibility = "hidden";
+          top = getComputedStyle(dropdownItems[i]).top;
+          if (top == "0px"){
+              drop(dropdownItems[i], i);
+          } else {
+            hide(dropdownItems[dropdownItems.length - i]);
           }
         }
       }
