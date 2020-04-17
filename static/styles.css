@@ -12,32 +12,42 @@ body {
 }
 
 #header {
-    padding: 1%;
+    padding-left: 1%;
     background-color: rgb(74, 168, 222);
     color: rgb(255, 255, 255);
-    width: 98%;
+    width: 99%;
     overflow: visible;
-    height: 10%;
+    height: 38px;
+    min-width: 350px;
 }
 
 #header h1 {
     display: inline-block;
 }
 
+#header h1 a {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+}
+
 .dropdown {
     position: relative;
     display: inline-block;
-    width: 70px;
+    width: 100px;
     float: right;
     text-align: center;
-    height: 1.25em;
+    height: 37px;
+    cursor: pointer;
 }
 
 .dropdown-item {
     border: 1px solid rgb(255, 255, 255);
+    padding: 8.5px 0;
     position: absolute;
     background-color: rgb(74, 168, 222);
     width: 100%;
+    right: 1px;
 }
 
 .dropdown-item a {
@@ -51,4 +61,9 @@ body {
         height: 400px;
         background-color: grey;
         margin: 1%;
+        min-width: 350px;
+}
+
+#art-query {
+    padding: 1%;
 }

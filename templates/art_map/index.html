@@ -4,20 +4,20 @@
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="../../static/styles.css?rand=6989065" />
+    <link rel="stylesheet" type="text/css" href="../../static/styles.css?rand=698965" />
     <script type=text/javascript>
       var art = JSON.parse({{ art|safe }});
     </script>
   </head>
   <body>
     <div id="header">
-      <h1>Vancouver Art</h1>
+      <h1><a href="/art_map/">Vancouver Art</a></h1>
       <div class="dropdown" onclick="toggleDropdown()">
-        <div class="dropdown-item" style="z-index: 4" >
+        <div class="dropdown-item" style="z-index: 5" >
           Menu
         </div>
         {% if user.is_authenticated %}
-          <div class="dropdown-item">
+          <div class="dropdown-item" style="z-index: 4" >
             <a href="/art_map/logout/">Logout</a>
           </div>
         {% else %}
@@ -85,7 +85,7 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap"
 	async defer></script>
     {% if user.is_authenticated %}
-      <form action="">
+      <form id="art-query" action="">
         <input type="radio" name="markerSet" value="Favourites"> Show Favourites
         <input type="radio" name="markerSet" value="All" checked="checked"> Show All
       </form>
@@ -114,42 +114,34 @@
       </script>
     {% endif %}
 
-    <script>
-      function drop(item, i){
-        var interval = setInterval(helper, 5);
-        var delta = 0;
+    <script type=text/javascript>
+
+      function toggle(item, i, position){
+        var interval = setInterval(helper, 2);
+        var delta;
+        position == "down" ?
+         delta = 0 :
+         delta = parseInt(item.style.top);
         function helper(){
-          if (delta == (100*i)){
+          if ((delta == (100*i) && position == "down") || (delta == 0 && position == "up")){
             clearInterval(interval);
           } else {
-            delta++;
-            item.style.top = delta + "%";
-          }
-        }
-      }
-
-      function hide(item){
-        var id = setInterval(helper, 5);
-        var delta = parseInt(item.style.top.substring(0, item.style.top.length-1));
-        function helper(){
-          if (delta == 0){
-            clearInterval(id);
-          } else {
-            delta--;
+            position == "down" ? delta++: delta--;
             item.style.top = delta + "%";
           }
         }
       }
 
       function toggleDropdown(){
+        var dropdown = document.querySelectorAll('#header .dropdown');
         var dropdownItems = document.querySelectorAll('#header .dropdown-item');
-        var top;
-        for (var i = 0; i < dropdownItems.length; i++){
-          top = getComputedStyle(dropdownItems[i]).top;
-          if (top == "0px"){
-              drop(dropdownItems[i], i);
-          } else {
-            hide(dropdownItems[dropdownItems.length - i]);
+        var top = parseInt(getComputedStyle(dropdownItems[dropdownItems.length-1]).top);
+        var height = parseInt(getComputedStyle(dropdown[0]).height);
+        for (var i = 1; i < dropdownItems.length; i++){
+          if (top == 0){
+            toggle(dropdownItems[i], i, "down");
+          } else if (top == height*(dropdownItems.length-1)){
+            toggle(dropdownItems[dropdownItems.length - i], i, "up");
           }
         }
       }
