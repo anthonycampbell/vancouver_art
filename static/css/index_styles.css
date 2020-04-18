@@ -11,7 +11,7 @@ body {
     height: 100%;
 }
 
-#header {
+.header {
     padding-left: 1%;
     background-color: rgb(74, 168, 222);
     color: rgb(255, 255, 255);
@@ -21,11 +21,11 @@ body {
     min-width: 350px;
 }
 
-#header h1 {
+.header h1 {
     display: inline-block;
 }
 
-#header h1 a {
+.header h1 a {
     display: inline-block;
     text-decoration: none;
     color: inherit;

@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    padding-left: 1%;
+    background-color: rgb(74, 168, 222);
+    color: rgb(255, 255, 255);
+    width: 99%;
+    overflow: visible;
+    height: 38px;
+    min-width: 350px;
+}
+
+.header h1 {
+    display: inline-block;
+}
+
+.header h1 a {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+}
+
+form {
+    background-color: rgb(242, 242, 242);
+    padding: 1%;
+    width: 96%;
+    margin: 1%;
+    border-radius: 5px;
+    min-width: 350px;
+}
+
+p {
+}
+
+label {
+    display: block;
+}
+
+input[type=text]{
+    width: 98%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(204, 204, 204);
+}
+input[type=email]{
+    width: 98%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(204, 204, 204);
+}
+input[type=password]{
+    width: 98%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(204, 204, 204);
+}
+
+input[type=submit]{
+    width: 98%;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(74, 168, 222);
+    color: rgb(255, 255, 255);
+}

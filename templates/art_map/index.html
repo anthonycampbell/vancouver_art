@@ -4,13 +4,13 @@
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="../../static/styles.css?rand=698965" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/index_styles.css?rand=69895" />
     <script type=text/javascript>
       var art = JSON.parse({{ art|safe }});
     </script>
   </head>
   <body>
-    <div id="header">
+    <div class="header">
       <h1><a href="/art_map/">Vancouver Art</a></h1>
       <div class="dropdown" onclick="toggleDropdown()">
         <div class="dropdown-item" style="z-index: 5" >
@@ -133,8 +133,8 @@
       }
 
       function toggleDropdown(){
-        var dropdown = document.querySelectorAll('#header .dropdown');
-        var dropdownItems = document.querySelectorAll('#header .dropdown-item');
+        var dropdown = document.querySelectorAll('.header .dropdown');
+        var dropdownItems = document.querySelectorAll('.header .dropdown-item');
         var top = parseInt(getComputedStyle(dropdownItems[dropdownItems.length-1]).top);
         var height = parseInt(getComputedStyle(dropdown[0]).height);
         for (var i = 1; i < dropdownItems.length; i++){

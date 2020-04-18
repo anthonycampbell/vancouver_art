@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
+	<link rel="stylesheet" type="text/css" href="../../static/css/register_styles.css?rand=699095" />
 	<title>Art_Map</title>
     </head>
-
     <body>
-	<h1>Register with Art_Map<h1>
-	{% if registered %}
-	Thank you for registering
-	<a href="/art_map/">Return to homepage.</a><br/>
-	{% else %}
-	Register Here<br/>
-	<form id="user_form" method="post" action="/art_map/register/">
-	    {% csrf_token %}
-	    {{ user_form.as_p }}
-	    {{ profile_form.as_p }}
-	    <input type="submit" name="submit" value="register" />
-	</form>
-	{% endif %}
+		<div class="header">
+			<h1><a href="/art_map/">Vancouver Art</a></h1>
+		</div>
+		<form id="user_form" method="post" action="/art_map/register/">
+			<h1>Register with Vancouver Art</h1>
+			{% if registered %}
+				Thank you for registering
+				<a href="/art_map/">Return to homepage.</a><br/>
+			{% else %}
+				<h3>Register here!</h3><br/>
+				{% csrf_token %}
+	    		{{ user_form.as_p }}
+	    		{{ profile_form.as_p }}
+				<input type="submit" name="submit" value="register" />
+		</form>
+			{% endif %}
     </body>
 </html>
