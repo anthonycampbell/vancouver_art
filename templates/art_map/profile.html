@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
-    <head> 
-	<title>Art_Map Favourites</title>
+    <head>
+		<link rel="stylesheet" type="text/css" href="../../static/css/profile_styles.css?rand=699895" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/header_styles.css?rand=69895" />
+		<title>Art_Map Favourites</title>
     </head>
     <body>
-	<h1>{{ user.username }}</h1>
-	<h2>Favourites</h2>
-	<ul>
-	{% for art_piece in favourites %}
-	     <li>{{ art_piece }}</li>
-	{% endfor %}
-	</ul>
-	<a href="/art_map/">Return to homepage</a><br/>
+		<div class="header">
+			<h1><a href="/art_map/">Vancouver Art</a></h1>
+		</div>
+		<h1>{{ user.username }}</h1>
+		<h2>Favourites</h2>
+		<ul>
+			{% for art_piece in favourites %}
+				<li>{{ art_piece }}</li>
+			{% endfor %}
+		</ul>
+		<a href="/art_map/">Return to homepage</a><br/>
     </body>
 </html>

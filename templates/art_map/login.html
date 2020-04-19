@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-	<title>Art_map</title>
+		<link rel="stylesheet" type="text/css" href="../../static/css/register_styles.css?rand=699895" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/header_styles.css?rand=69895" />
+		<title>Art_map</title>
     </head>
     <body>
-	<h1>Login</h1>
-	<form id="login_form" method="post" action="/art_map/login/">
-	    {% csrf_token %}
-	    Username: <input type="text" name="username" value="" size="50" />
-	    <br/>
-	    Password: <input type="password" name="password" value="" size="50" />
-	    <br/>
-	    <input type="submit" value="submit" />
-	</form>
+		<div class="header">
+			<h1><a href="/art_map/">Vancouver Art</a></h1>
+		</div>
+		<form id="login_form" method="post" action="/art_map/login/">
+			<h1>Login to Vancouver Art</h1>
+			<h3> Please sign in</h3>
+			<br/>
+	    	{% csrf_token %}
+			<p>
+				Username: <input type="text" name="username" value="" size="50" />
+			</p>
+			<p>
+				Password: <input type="password" name="password" value="" size="50" />
+			</p>
+	    	<input type="submit" value="Sign in" />
+		</form>
     </body>
 </html>
