@@ -1,0 +1,43 @@
+.header {
+    padding-left: 1%;
+    background-color: rgb(74, 168, 222);
+    color: rgb(255, 255, 255);
+    width: 99%;
+    overflow: visible;
+    height: 38px;
+    min-width: 400px;
+}
+
+.header h1 {
+    display: inline-block;
+}
+
+.header h1 a {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    float: right;
+    text-align: center;
+    height: 37px;
+    cursor: pointer;
+}
+
+.dropdown-item {
+    border: 1px solid rgb(255, 255, 255);
+    padding: 8.5px 0;
+    position: absolute;
+    background-color: rgb(74, 168, 222);
+    width: 100%;
+    right: 1px;
+}
+
+.dropdown-item a {
+    text-decoration: none;
+    color: inherit;
+}
