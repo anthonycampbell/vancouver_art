@@ -13,3 +13,9 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         exclude = ['user', 'favourites']
+        fields = ('picture',)
+
+class PictureForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('picture',)

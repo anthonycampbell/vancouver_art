@@ -1,24 +1,46 @@
 <!DOCTYPE html>
+
+{% load staticfiles %}
+
 <html>
     <head>
-		<link rel="stylesheet" type="text/css" href="../../static/css/register_styles.css?rand=699895" />
-		<link rel="stylesheet" type="text/css" href="../../static/css/header_styles.css?rand=69895" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/register_styles.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/header_styles.css" />
+		<script src="{% static 'javascript/dropdown.js' %}"></script>
 		<title>Art_map</title>
     </head>
     <body>
 		<div class="header">
 			<h1><a href="/art_map/">Vancouver Art</a></h1>
+			<div class="dropdown" onclick="toggleDropdown()">
+        		<div class="dropdown-item" style="z-index: 5" >
+          			Menu
+        		</div>
+				<div class="dropdown-item" style="z-index: 4" >
+            		<a href="/art_map/">Home</a>
+          		</div>
+				<div class="dropdown-item" style="z-index: 3">
+            		<a href="/art_map/register/">Register</a>
+          		</div>
+      		</div>
 		</div>
 		<form id="login_form" method="post" action="/art_map/login/">
 			<h1>Login to Vancouver Art</h1>
 			<h3> Please sign in</h3>
 			<br/>
 	    	{% csrf_token %}
+			<ul>
+				<li>
+					{{ login_error }}
+				</li>
+			</ul>
 			<p>
-				Username: <input type="text" name="username" value="" size="50" />
+				<label for="username"> Username: </label>
+				<input type="text" id="username" name="username" value="" size="50" />
 			</p>
 			<p>
-				Password: <input type="password" name="password" value="" size="50" />
+				<label for="password"> Password: </label>
+				<input type="password" id="password" name="password" value="" size="50" />
 			</p>
 	    	<input type="submit" value="Sign in" />
 		</form>

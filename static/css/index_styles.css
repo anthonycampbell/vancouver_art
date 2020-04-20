@@ -19,6 +19,10 @@ body {
         min-width: 350px;
 }
 
+#please-use-me {
+    margin: 1%;
+}
+
 #art-query {
     padding: 1%;
 }

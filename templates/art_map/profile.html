@@ -1,21 +1,60 @@
 <!DOCTYPE html>
+
+{% load staticfiles %}
+
 <html>
     <head>
-		<link rel="stylesheet" type="text/css" href="../../static/css/profile_styles.css?rand=699895" />
-		<link rel="stylesheet" type="text/css" href="../../static/css/header_styles.css?rand=69895" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/profile_styles.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/header_styles.css" />
+		<script src="{% static 'javascript/dropdown.js' %}"></script>
 		<title>Art_Map Favourites</title>
     </head>
     <body>
 		<div class="header">
 			<h1><a href="/art_map/">Vancouver Art</a></h1>
+			<div class="dropdown" onClick="toggleDropdown()">
+				<div class="dropdown-item" style="z-index: 3">
+					Menu
+				</div>
+				{% if user.is_authenticated %}
+				<div class="dropdown-item" style="z-index: 2">
+					<a href="/art_map/logout/">Logout</a>
+				</div>
+				{% endif %}
+				<div class="dropdown-item" style="z-index: 1">
+					<a href="/art_map/">Home</a>
+				</div>
+			</div>
 		</div>
-		<h1>{{ user.username }}</h1>
-		<h2>Favourites</h2>
-		<ul>
-			{% for art_piece in favourites %}
-				<li>{{ art_piece }}</li>
-			{% endfor %}
-		</ul>
-		<a href="/art_map/">Return to homepage</a><br/>
+		<div id="profile">
+			<h1>Hello {{ user.username }}!</h1>
+			<br/>
+			<div class="container">
+				{% if user.userprofile.picture %}
+					<img src="{{ picture }}" />
+					<h2>{{ user.username }}</h2>
+				{% else %}
+					<img src="{% static 'pics/profile_pic.png' %}" />
+					<h2>{{ user.username }}</h2>
+					<form id="picture_form" method="post" action="/art_map/profile/" enctype="multipart/form-data">
+						{% csrf_token %}
+						{{ picture_form.as_p }}
+						<input type="submit" name="submit" value="Upload profile picture" />
+					</form>
+				{% endif %}
+			</div>
+			<br/>
+			<h3>Favourite Artwork</h3>
+			<ul>
+				{% for art_piece in favourites %}
+					<li>{{ art_piece }}</li>
+				{% empty %}
+					<span>
+						Oops! It looks like you have not favourited any art yet.
+						Navigate to the homepage to add to your favourites.
+					</span>
+				{% endfor %}
+			</ul>
+		</div>
     </body>
 </html>

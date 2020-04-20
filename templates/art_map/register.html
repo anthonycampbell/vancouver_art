@@ -1,15 +1,30 @@
 <!DOCTYPE html>
+
+{% load staticfiles %}
+
 <html>
     <head>
-	<link rel="stylesheet" type="text/css" href="../../static/css/register_styles.css?rand=699895" />
-	<link rel="stylesheet" type="text/css" href="../../static/css/header_styles.css?rand=69895" />
+	<link rel="stylesheet" type="text/css" href="../../static/css/register_styles.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/css/header_styles.css" />
+	<script src="{% static 'javascript/dropdown.js' %}"></script>
 	<title>Art_Map</title>
     </head>
     <body>
 		<div class="header">
 			<h1><a href="/art_map/">Vancouver Art</a></h1>
+			<div class="dropdown" onclick="toggleDropdown()">
+				<div class="dropdown-item" style="z-index: 5" >
+          			Menu
+				</div>
+				<div class="dropdown-item" style="z-index: 4" >
+            		<a href="/art_map/">Home</a>
+          		</div>
+				<div class="dropdown-item" style="z-index: 2">
+            		<a href="/art_map/login/">Login</a>
+          		</div>
+			</div>
 		</div>
-		<form id="user_form" method="post" action="/art_map/register/">
+		<form id="user_form" method="post" action="/art_map/register/" enctype="multipart/form-data">
 			<h1>Register with Vancouver Art</h1>
 			{% if registered %}
 				Thank you for registering

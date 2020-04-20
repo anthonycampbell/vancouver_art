@@ -4,11 +4,10 @@
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="../../static/css/index_styles.css?rand=69895" />
-    <link rel="stylesheet" type="text/css" href="../../static/css/header_styles.css?rand=69895" />
-    <script type=text/javascript>
-      var art = JSON.parse({{ art|safe }});
-    </script>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index_styles.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/header_styles.css" />
+    <script src="{% static 'javascript/dropdown.js' %}"></script>
+    <script type=text/javascript> var art = JSON.parse({{ art|safe }});</script>
   </head>
   <body>
     <div class="header">
@@ -39,8 +38,8 @@
 	  var map;
 	  var markers = {};
 	  function initMap() {
-	    var vancouver = {lat: 49.2827, lng: -123.1207};
-	    var img = {url: '/static/pics/fancy-icon.png', scaledSize: new google.maps.Size(20, 20)};
+	    var vancouver = {lat: 49.2500, lng: -123.1300};
+	    var img = {url: '/static/pics/marker.png', scaledSize: new google.maps.Size(12, 18)};
 	    var infowindow = new google.maps.InfoWindow({maxWidth: 200});
 	    var title;
 	    var lat;
@@ -50,12 +49,15 @@
 	    var photoURL;
 	    var description;
 	    var art_id;
-	    map = new google.maps.Map(document.getElementById('map'), {zoom: 11, center: vancouver});
+	    map = new google.maps.Map(document.getElementById('map'), {zoom: 12, center: vancouver});
 	    for (i = 0; i < art.length; i++){
 	      art_id = art[i].pk;
 	      title = art[i].fields['title'];
 	      description = art[i].fields['description'];
 	      photoURL = art[i].fields['photoURL'];
+	      if (photoURL == null){
+	        photoURL = "";
+	      }
 	      lat = art[i].fields['lat'];
 	      lon = art[i].fields['lon'];
 	      if (lat && lon){
@@ -70,8 +72,8 @@
 			            "{% csrf_token %}" +
 				        "<input type=\"hidden\" id=\"art_id\" name=\"art_id\" value="+art_id+">" +
 				        "<b>"+title+"</b><br/>" +
-				        "Description: "+description+"<br/>" +
-				        "Photo:<a href="+photoURL+">"+photoURL+"</a><br/>" +
+				        "Description:<br/> "+description+"<br/>" +
+				        "<br/>Photo:<br/><a style=\"word-wrap: break-word\" href="+photoURL+">"+photoURL+"</a><br/><br/>" +
 				        "<input type=\"submit\" value=\"favourite\"/><br/>" +
 				      "</form><br/>" +
 				    "</div>");
@@ -85,6 +87,7 @@
 	</script>
 	<script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap"
 	async defer></script>
+    <span id="please-use-me">Click the blue markers!</span>
     {% if user.is_authenticated %}
       <form id="art-query" action="">
         <input type="radio" name="markerSet" value="Favourites"> Show Favourites
@@ -114,38 +117,5 @@
         }
       </script>
     {% endif %}
-
-    <script type=text/javascript>
-
-      function toggle(item, i, position){
-        var interval = setInterval(helper, 2);
-        var delta;
-        position == "down" ?
-         delta = 0 :
-         delta = parseInt(item.style.top);
-        function helper(){
-          if ((delta == (100*i) && position == "down") || (delta == 0 && position == "up")){
-            clearInterval(interval);
-          } else {
-            position == "down" ? delta++: delta--;
-            item.style.top = delta + "%";
-          }
-        }
-      }
-
-      function toggleDropdown(){
-        var dropdown = document.querySelectorAll('.header .dropdown');
-        var dropdownItems = document.querySelectorAll('.header .dropdown-item');
-        var top = parseInt(getComputedStyle(dropdownItems[dropdownItems.length-1]).top);
-        var height = parseInt(getComputedStyle(dropdown[0]).height);
-        for (var i = 1; i < dropdownItems.length; i++){
-          if (top == 0){
-            toggle(dropdownItems[i], i, "down");
-          } else if (top == height*(dropdownItems.length-1)){
-            toggle(dropdownItems[dropdownItems.length - i], i, "up");
-          }
-        }
-      }
-    </script>
   </body>
 </html>
