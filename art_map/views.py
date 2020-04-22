@@ -18,7 +18,7 @@ def index(request):
     # art = json.dumps(json_data)
     # json_file.close()
     art = json.dumps(serializers.serialize('json', ArtPiece.objects.all()))
-    context_dict = {'key': "AIzaSyCFHriElijlo7ySqBCfFR78sjERkh3_Qt0"}
+    context_dict = {'key': ""}
     context_dict['art'] = art
     return render(request, 'art_map/index.html', context_dict)
 
