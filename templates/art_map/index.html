@@ -4,8 +4,8 @@
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="../../static/css/index_styles.css" />
-    <link rel="stylesheet" type="text/css" href="../../static/css/header_styles.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index_styles.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header_styles.css' %}" />
     <script src="{% static 'javascript/dropdown.js' %}"></script>
     <script type=text/javascript> var art = JSON.parse({{ art|safe }});</script>
   </head>
